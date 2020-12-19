@@ -1,11 +1,17 @@
 import { gql } from '@apollo/client';
 
 const stackQuery = gql`
-	query(){	
-		stacks() {
+	query{	
+		stacks {
 			stackID
 			title
 			dotColor
+			notes {
+				stackID
+				noteID
+				title
+				done
+			}
 		}
 	}
 `;
@@ -84,7 +90,7 @@ export {
 	stackQuery,
 	noteQuery,
 	editStackMutation,
-	editStackMutation,
+	editNoteMutation,
 	newStackMutation,
 	newNoteMutation,
 	deleteStackMutation, 
