@@ -80,4 +80,13 @@ const deleteNoteMutation= gql`
 
 
 
-export { stackQuery, noteQuery, newStackMutation, newNoteMutation,  deleteStackMutation, };
+export {
+	stackQuery,
+	noteQuery,
+	editStackMutation,
+	editStackMutation,
+	newStackMutation,
+	newNoteMutation,
+	deleteStackMutation, 
+	deleteNoteMutation
+};
