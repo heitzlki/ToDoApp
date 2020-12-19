@@ -4,6 +4,7 @@ const { ApolloError, UserInputError } = require('apollo-server')
 const errorMessages = require('./errorMessages.json');
 const crypto = require("crypto");
 const { exception } = require('console');
+const stack = require('../models/stack');
 
 module.exports = resolvers = {
   Query: {
@@ -76,7 +77,7 @@ module.exports = resolvers = {
 			let errors = {}
 			try {
 				if(stackID.trim() === '')
-					errors.stack == "Stack ID isn't aviable!"
+					errors.stack = "Stack ID isn't aviable!"
 				if (title.trim().length() < 3) {
 					errors.title = errorMessages.noteNameToShort
           throw new UserInputError(errorMessages.UserInputError, {
@@ -101,6 +102,94 @@ module.exports = resolvers = {
 
 				return noteSave
 			} catch (err) {
+				throw new UserInputError(errorMessages.userInputError, {
+					errors: err
+				})
+			}
+		},
+		editStack: async (_, args) => {
+			let {
+				stackID,
+				title,
+				dotColor
+			} = args
+			let errors = {}
+			try {
+				if(stackID.trim() === '')
+					errors.stack = "Stack ID isn't aviable!"
+				if(title.trim().length() < 3)
+					errors.title = errorMessages.stackNameToShort
+				if(dotColor.trim() === '')
+					dotColor = 'white'
+				
+				if(Object.length(errors) < 0) {
+					throw new UserInputError(errorMessages.userInputError, {
+						errors: err
+					})
+				}
+
+				const stackIdCheck = Stack.find({stackID});
+				if(!stackIdCheck) {
+					errors.stack = "Stack ID isn't aviable!"
+				}
+
+				let stack = new Stack({
+					stackID,
+					title,
+					dotColor
+				});
+
+				const stackSave = await stack.save();
+
+				return stackSave
+			} catch(err) {
+				throw new UserInputError(errorMessages.userInputError, {
+					errors: err
+				})
+			}
+		},
+		editNote: async (_, args) => {
+			let {
+				stackID,
+				noteID,
+				title,
+				done
+			} = args
+			let errors = {}
+			try {
+				if(stackID.trim() === '')
+					errors.stack = "Stack ID isn't aviable!"
+				if(noteID.trim() === '')
+					errors.note = "Note ID isn't aviable!"
+				if(title.trim().length() < 3)
+					errors.title = errorMessages.stackNameToShort
+				if(done.trim() === '')
+					done = false
+				if(Object.length(errors) < 0) {
+					throw new UserInputError(errorMessages.userInputError, {
+						errors: err
+					});
+				}
+
+				const noteIDCheck = Stack.find({stackID, noteID});
+				if(!noteIDCheck) {
+					errors.note = "Note/Stack ID isn't aviable!"
+					throw new UserInputError(errorMessages.userInputError, {
+						errors: err
+					});
+				}
+
+				let note = new Note({
+					stackID,
+					noteID,
+					title,
+					done
+				});
+
+				const noteSave = await note.save();
+
+				return noteSave
+			} catch(err) {
 				throw new UserInputError(errorMessages.userInputError, {
 					errors: err
 				})

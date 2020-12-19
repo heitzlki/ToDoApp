@@ -6,6 +6,7 @@ module.exports = typeDefs = gql `
     stackID: String!
     title: String
     dotColor: String
+    notes: [Note]
   }
   type Note {
     stackID: String!
@@ -17,10 +18,10 @@ module.exports = typeDefs = gql `
     deleted: Boolean
   }
   type Query {
-    login(
-      username: String,
-      password: String
-    ): User
+    stacks() {}: Stack
+    notes(
+      stackID: String
+    ): Note
   }
   type Mutation {
     newStack(
@@ -31,6 +32,17 @@ module.exports = typeDefs = gql `
       stackID: String
       title: String
     ): Note
+    editStack(
+      stackID: String
+      title: String
+      dotColor: String
+    ): Stack
+    editNote(
+      stackID: String!
+      noteID: String!
+      title: String
+      done: Boolean
+    ): Note
     deleteStack(
       stackID: String
     ): deleted
@@ -38,6 +50,5 @@ module.exports = typeDefs = gql `
       stackID: String
       noteID: String
     ): deleted
-
   }
 `;
