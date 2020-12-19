@@ -6,13 +6,13 @@ const stackQuery = gql`
 			stackID
 			title
 			dotColor
-			notes
 		}
 	}
 `;
 const noteQuery = gql`
 	query($stackID: String!) {
 		notes(stackID: $stackID) {
+			stackID
 			noteID
 			title
 			done
@@ -21,7 +21,7 @@ const noteQuery = gql`
 `;
 
 const newStackMutation = gql`
-	mutation($title: String!, $dotColor: String) {
+	mutation($title: String!, $dotColor: String!) {
 		newStack(title: $title, dotColor: $dotColor) {
 			stackID
 			title
@@ -32,7 +32,29 @@ const newStackMutation = gql`
 
 const newNoteMutation = gql`
 	mutation($stackID: String!, $title: String!) {
-		notes(stackID: $stackID, title: $title) {
+		newNote(stackID: $stackID, title: $title) {
+			stackID
+			noteID
+			title
+			done
+		}
+	}
+`;
+
+const editStackMutation = gql`
+	mutation($stackID: String!, $title: String!, $dotColor: String!) {
+		editStack(stackID: $stackID,title: $title, dotColor: $dotColor) {
+			stackID
+			title
+			dotColor
+		}
+	}
+`;
+
+const editNoteMutation = gql`
+	mutation($stackID: String!, $noteID: String!,$title: String!, $done: Boolean) {
+		editNote(stackID: $stackID, noteID: $noteID, title: $title, done: $done) {
+			stackID
 			noteID
 			title
 			done
