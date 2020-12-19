@@ -5,6 +5,6 @@ const stackSchema = new Schema({
 	stackID: String,
 	title: String,
 	dotColor: String
-})
+});
 
 module.exports = Stack = mongoose.model('Stack', stackSchema);

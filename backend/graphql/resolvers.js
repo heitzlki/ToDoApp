@@ -3,7 +3,6 @@ const Note = require('../models/note');
 const { ApolloError, UserInputError } = require('apollo-server')
 const errorMessages = require('./errorMessages.json');
 const crypto = require("crypto");
-const { exception } = require('console');
 const stack = require('../models/stack');
 
 module.exports = resolvers = {
@@ -15,7 +14,9 @@ module.exports = resolvers = {
 					return null
 				return stacks
 			} catch (err) {
-				throw err
+				throw new UserInputError(errorMessages.userInputError, {
+					err
+				})
 			}
 		},
 		notes: async (_, args) => {
@@ -38,7 +39,7 @@ module.exports = resolvers = {
 			} = args
 			let errors = {}
 			try {
-				if (title.trim().length() < 3) {
+				if (title.trim().length < 3) {
 					errors.title = errorMessages.stackNameToShort
           throw new UserInputError(errorMessages.UserInputError, {
             errors
@@ -51,10 +52,10 @@ module.exports = resolvers = {
 				const stackIdCheck = await Stack.findOne({
           stackID
 				})
-				if(stackIdCheck) {
+				if(stackIdCheck == null) {
 					stackID = crypto.randomBytes(8).toString("hex")
         }
-				let stack = new User({
+				let stack = new Stack({
 					stackID,
 					title,
 					dotColor
@@ -78,17 +79,17 @@ module.exports = resolvers = {
 			try {
 				if(stackID.trim() === '')
 					errors.stack = "Stack ID isn't aviable!"
-				if (title.trim().length() < 3) {
+				if (title.trim().length < 3) {
 					errors.title = errorMessages.noteNameToShort
           throw new UserInputError(errorMessages.UserInputError, {
             errors
           })
 				}
-				let noteID = crypto.randomBytes(8).toString("hex")
-				const noteIDCheck = await note.findOne({
+				let noteID = crypto.randomBytes(8).toString("hex");
+				const noteIDCheck = await Note.findOne({
           noteID
 				})
-				if(noteIDCheck) {
+				if(noteIDCheck == null) {
 					noteID = crypto.randomBytes(8).toString("hex")
         }
 				let note = new Note({
@@ -117,12 +118,12 @@ module.exports = resolvers = {
 			try {
 				if(stackID.trim() === '')
 					errors.stack = "Stack ID isn't aviable!"
-				if(title.trim().length() < 3)
+				if(title.trim().length < 3)
 					errors.title = errorMessages.stackNameToShort
 				if(dotColor.trim() === '')
 					dotColor = 'white'
 				
-				if(Object.length(errors) < 0) {
+				if(Object.keys(errors).length < 0) {
 					throw new UserInputError(errorMessages.userInputError, {
 						errors: err
 					})
@@ -131,15 +132,17 @@ module.exports = resolvers = {
 				const stackIdCheck = Stack.find({stackID});
 				if(!stackIdCheck) {
 					errors.stack = "Stack ID isn't aviable!"
+					throw new UserInputError(errorMessages.userInputError, {
+						errors: err
+					})
 				}
 
-				let stack = new Stack({
-					stackID,
+				const stackSave = await Stack.findOneAndUpdate({
+					stackID
+				}, {
 					title,
 					dotColor
 				});
-
-				const stackSave = await stack.save();
 
 				return stackSave
 			} catch(err) {
@@ -159,18 +162,18 @@ module.exports = resolvers = {
 			try {
 				if(stackID.trim() === '')
 					errors.stack = "Stack ID isn't aviable!"
+				
 				if(noteID.trim() === '')
 					errors.note = "Note ID isn't aviable!"
-				if(title.trim().length() < 3)
+				if(title.trim().length < 3)
 					errors.title = errorMessages.stackNameToShort
-				if(done.trim() === '')
+				if(!done)
 					done = false
-				if(Object.length(errors) < 0) {
+				if(Object.keys(errors).length < 0) {
 					throw new UserInputError(errorMessages.userInputError, {
 						errors: err
 					});
 				}
-
 				const noteIDCheck = Stack.find({stackID, noteID});
 				if(!noteIDCheck) {
 					errors.note = "Note/Stack ID isn't aviable!"
@@ -179,14 +182,15 @@ module.exports = resolvers = {
 					});
 				}
 
-				let note = new Note({
+				const noteSave = await Note.findOneAndUpdate({
+					stackID,
+					noteID
+				}, {
 					stackID,
 					noteID,
 					title,
 					done
 				});
-
-				const noteSave = await note.save();
 
 				return noteSave
 			} catch(err) {
@@ -246,7 +250,7 @@ module.exports = resolvers = {
 			} catch (err) {
 				throw new UserInputError(errorMessages.userInputError, {
 					errors: err
-				})
+				});
 			}
 		},
   }

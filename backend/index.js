@@ -6,10 +6,12 @@ const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
 
 //MongoDB connection
-mongoose.connect(process.env.DATABASE, {
+mongoose.connect(process.env.DATABASE_FLEXNOTE, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+//Disable the DeprecationWarning by findOneAndUpdate() function.
+mongoose.set('useFindAndModify', false);
 mongoose.connection.once('open', () => {
   console.log('🍃 Connected to Database!');
 });

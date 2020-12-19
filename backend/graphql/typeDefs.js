@@ -1,16 +1,16 @@
-const { gql } = require('apollo-server')
+const { gql } = require('apollo-server');
 
 
 module.exports = typeDefs = gql `
   type Stack {
-    stackID: String!
+    stackID: String
     title: String
     dotColor: String
-    notes: [Note]
+    #notes: [Note]
   }
   type Note {
-    stackID: String!
-    noteID: String!
+    stackID: String
+    noteID: String
     title: String
     done: Boolean
   }
@@ -18,10 +18,10 @@ module.exports = typeDefs = gql `
     deleted: Boolean
   }
   type Query {
-    stacks() {}: Stack
+    stacks: [Stack]
     notes(
       stackID: String
-    ): Note
+    ): [Note]
   }
   type Mutation {
     newStack(
