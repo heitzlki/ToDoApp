@@ -10,31 +10,17 @@ module.exports = resolvers = {
     stacks: async () => {
 			try {
 				const stacks = await Stack.find({});
-				//const notes = resolvers.Query.notes(stacks.stackID)
-				console.log(stacks.id)
-				//resolvers.Query.allNotes();
 				if(!stack)
 					return null
-				return  stacks //, notes }
+				return  stacks
 			} catch (err) {
 				throw new UserInputError(errorMessages.userInputError, {
 					err
 				})
 			}
 		},
-		allNotes: async (parents) => {
-			console.log(parents)
-			try {
-				return null
-			} catch (err) {
-				throw new UserInputError(errorMessages.userInputError, {
-					err
-				})
-			}
-		},
-		notes: async (parent, args) => {
+		notes: async (_, args) => {
 			const { stackID } = args;
-			console.log(args)
 			try {
 				const notes = await Note.find({stackID});
 				if(!notes)
