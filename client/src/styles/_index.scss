@@ -1,4 +1,86 @@
-@import '_variables.scss';
-@import '_input.scss';
-@import '_stack.scss';
-@import '_note.scss';
+$colone: #ff8a00;
+$coltwo: #da1b60;
+
+$size: 1.35rem;
+$color_: #7a7a8c;
+$ground: #1d1e22; // ffffff
+$border: #4c4f5a;
+$light: #d6ebf6ff; //bbddeeff d6ebf6ff
+$stackGround: #282828ff; // 282828ff 333333ff
+$grayOne: #242529ff;
+
+$green: #00ffccff;
+$red: #ff0066ff;
+$blue: #2ad4ffff;
+$yellow: #ffcc00ff;
+$font-size-big: 2rem;
+$font-weight-bold: bold;
+$default-border-radius: 24px;
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  text-align:center;
+  justify-content: center;
+  font: 400 $size sans-serif;
+  color: $color_;
+  background-color: $ground;
+  background: radial-gradient(
+    $border 6%,
+    transparent 6%),
+    darken($ground, 2%
+  );
+  background-position: 0 0, 25px 25px;
+  background-size: 25px 25px;
+}
+
+.stack {
+  width: 100%;
+  max-width: 380px;
+  place-items: center;
+  text-align: center;
+  text-decoration-style: none;
+  list-style-type: none;
+  border-radius: $default-border-radius;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 24px;
+  background-color: $stackGround;
+  margin: 10px;
+  color: $light;
+}
+.new-stack {
+  width: 100%;
+  min-width: 580px;
+  background-color: $grayOne;
+  padding: 10px;
+  border-radius: 20px;
+  margin-top: 30px;
+  .new-stack-title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .new-stack-title-input {
+      border: none;
+      border-radius: $default-border-radius;
+      background-color: $ground;
+      color: $light;
+      text-align: center;
+      padding: 10px;
+      width: 300px;
+      margin-bottom: 10px;
+  }
+  .new-stack-button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
+    outline: none;
+    width: 40px; height: 40px;
+    background: $light;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
