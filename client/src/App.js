@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 //import { Provider } from 'react-redux'
 
+import './index.scss';
+
 const client = new ApolloClient({
 	cache: new InMemoryCache(),
 	uri: 'http://localhost:4000'
