@@ -6,7 +6,9 @@ export default function Home() {
 	return (
 		<div className="App">
 			<NewStack />
-			<Stack />
+			<div className="grid-box">
+				<Stack />
+			</div>
 		</div>
 	);	
 };
