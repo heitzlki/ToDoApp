@@ -52,8 +52,8 @@ body {
     margin-top: 0px;
   }
   .new-stack-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: $font-size-big;
+    font-weight: $font-weight-bold;
   }
   .new-stack-title-input {
       border: none;
@@ -101,7 +101,7 @@ body {
   .stack {
     width: 100%;
     margin: 0 0 20px;
-    //padding: 10px;
+    padding: 10px;
     background: $second-layer-color;
     max-width: 100%;
     border-radius: $default-border-radius;
@@ -111,6 +111,14 @@ body {
       margin-top: 10px;
       padding-right: 100%;
       padding-left: 10px;
+    }
+    .stack-title {
+      margin: 0px;
+      font-size: $font-size-big;
+      font-weight: $font-weight-bold;
+    }
+    .stack-note {
+      margin: 10px;
     }
   }
 }

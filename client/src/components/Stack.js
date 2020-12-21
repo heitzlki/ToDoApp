@@ -11,7 +11,7 @@ export default function Stack() {
 			data.stacks.map((stack) => {
 				return (
 					<div className="stack">
-						<div className="stacl-head">
+						<div className="stack-head">
 							<div className="stack-dot">
 								<svg height="24" width="24">
 									<circle cx="13" cy="13" r="10" stroke="#d6ebf6ff" stroke-width="0" fill={stack.dotColor} />
