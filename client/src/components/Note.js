@@ -1,7 +1,7 @@
 export default function Note() {
-	return (
-		<div className="App">
-			<p>Note</p>
-		</div>
-	);	
-};
+  return (
+    <div className="App">
+      <p>Note</p>
+    </div>
+  );
+}

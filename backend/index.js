@@ -1,27 +1,29 @@
-const { ApolloServer, gql } = require('apollo-server');
-require('dotenv').config();
-const mongoose = require('mongoose');
+const { ApolloServer, gql } = require("apollo-server");
+require("dotenv").config();
+const mongoose = require("mongoose");
 
-const typeDefs = require('./graphql/typeDefs');
-const resolvers = require('./graphql/resolvers');
+const typeDefs = require("./graphql/typeDefs");
+const resolvers = require("./graphql/resolvers");
 
 //MongoDB connection
 mongoose.connect(process.env.DATABASE_FLEXNOTE, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 //Disable the DeprecationWarning by findOneAndUpdate() function.
-mongoose.set('useFindAndModify', false);
-mongoose.connection.once('open', () => {
-  console.log('🍃 Connected to Database!');
+mongoose.set("useFindAndModify", false);
+mongoose.connection.once("open", () => {
+  console.log("🍃 Connected to Database!");
 });
 
-const server = new ApolloServer({ 
-  typeDefs, 
+const server = new ApolloServer({
+  typeDefs,
   resolvers,
-  context: (ctx) => ctx
+  context: (ctx) => ctx,
 });
 
 server.listen().then(() => {
-  console.log(`🚀  Server ready at http://${process.env.URI}:${process.env.PORT}`);
+  console.log(
+    `🚀  Server ready at http://${process.env.URI}:${process.env.PORT}`
+  );
 });
