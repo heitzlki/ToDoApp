@@ -1,46 +1,45 @@
-import { useMutation } from "@apollo/client";
-import { newStackMutation } from "../queries/queries";
-import { useState } from "react";
+import { useMutation } from '@apollo/client';
+import { newStackMutation } from '../queries/queries';
+import { useState } from 'react';
 
 export default function NewStack() {
   const [stack, setStack] = useState({
-    dotColor: "",
-    title: "",
+    title: '',
+    dotColor: 'red',
   });
-  const [newStack, { loading, error, data }] = useMutation(newStackMutation, {
+  const [newStack] = useMutation(newStackMutation, {
     onCompleted(data) {
-      //Should reload notes
-      return null;
+      //localStorage.setItem('token', data.login.token)
+      console.log(data);
     },
     onError(err) {
-      try {
-        //Sould return error Notfitication
-        return null;
-        //setErrors("")
-        //setErrors(err.graphQLErrors[0].extensions.errors);
-      } catch {
-        console.log(err);
-      }
+      console.log(err);
+      /*
+        try {
+            setErrors(err.graphQLErrors[0].extensions.errors.errors);
+        } catch {
+            console.log(err.graphQLErrors)
+        }*/
     },
   });
-
   const handleNewStackSubmit = (e) => {
     e.preventDefault();
-    console.log(stack);
-    //Send Mutation
+    /*console.log({ stack });
+    newStack({ stack });*/
+    newStack({ title: 'Test', dotColor: 'red' });
   };
 
   const handleDotChange = (e) => {
     setStack({
-      dotColor: e.target.value,
       title: stack.title,
+      dotColor: e.target.value,
     });
   };
 
   const handleTitleChange = (e) => {
     setStack({
-      dotColor: stack.dotColor,
       title: e.target.value,
+      dotColor: stack.dotColor,
     });
   };
 

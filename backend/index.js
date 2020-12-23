@@ -17,8 +17,13 @@ mongoose.connection.once("open", () => {
 });
 
 const server = new ApolloServer({
+  cors: {
+    origin: "http://localhost:3000",
+    credentials: true,
+  },
   typeDefs,
   resolvers,
+  playground: true,
   context: (ctx) => ctx,
 });
 
