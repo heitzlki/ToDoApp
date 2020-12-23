@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const stackQuery = gql`
   query {
@@ -27,7 +27,7 @@ const noteQuery = gql`
 `;
 
 const newStackMutation = gql`
-  mutation newStack($title: String!, $dotColor: String!) {
+  mutation newStack($title: String, $dotColor: String) {
     newStack(title: $title, dotColor: $dotColor) {
       stackID
       title

@@ -45,6 +45,7 @@ module.exports = resolvers = {
     newStack: async (_, args) => {
       let { title, dotColor } = args;
       let errors = {};
+      console.log(args);
       try {
         if (title.trim().length < 3) {
           errors.title = errorMessages.stackNameToShort;

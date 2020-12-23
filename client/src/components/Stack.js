@@ -1,9 +1,9 @@
-import { useQuery } from "@apollo/client";
-import { stackQuery } from "../queries/queries";
+import { useQuery } from '@apollo/client';
+import { stackQuery } from '../queries/queries';
 
 export default function Stack() {
   const { loading, error, data } = useQuery(stackQuery);
-  if (loading) return "Loading...";
+  if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
   return (
     <div className="stacks">

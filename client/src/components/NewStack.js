@@ -1,15 +1,14 @@
-import { useMutation } from '@apollo/client';
-import { newStackMutation } from '../queries/queries';
-import { useState } from 'react';
+import { useMutation } from "@apollo/client";
+import { newStackMutation } from "../queries/queries";
+import { useState } from "react";
 
 export default function NewStack() {
   const [stack, setStack] = useState({
-    title: '',
-    dotColor: 'red',
+    title: "",
+    dotColor: "red",
   });
   const [newStack] = useMutation(newStackMutation, {
     onCompleted(data) {
-      //localStorage.setItem('token', data.login.token)
       console.log(data);
     },
     onError(err) {
@@ -24,9 +23,9 @@ export default function NewStack() {
   });
   const handleNewStackSubmit = (e) => {
     e.preventDefault();
-    /*console.log({ stack });
-    newStack({ stack });*/
-    newStack({ title: 'Test', dotColor: 'red' });
+    console.log({ stack });
+    newStack({ stack });
+    //newStack({ title: "Test", dotColor: "red" });
   };
 
   const handleDotChange = (e) => {
