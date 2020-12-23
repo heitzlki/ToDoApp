@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+const { gql } = require('apollo-server')
 
 module.exports = typeDefs = gql`
   type Stack {
@@ -33,5 +33,6 @@ module.exports = typeDefs = gql`
     ): Note
     deleteStack(stackID: String): deleted
     deleteNote(stackID: String, noteID: String): deleted
+    deleteEverything(verification: String!): deleted
   }
-`;
+`

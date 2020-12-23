@@ -244,5 +244,35 @@ module.exports = resolvers = {
         })
       }
     },
+    deleteEverything: async (_, args) => {
+      let { verification } = args
+      let errors = {}
+      console.log(args)
+      try {
+        if (verification.trim() === '') {
+          errors.verification == 'Passphrase is empty!'
+          throw new UserInputError(errorMessages.userInputError, {
+            errors,
+          })
+        }
+        if (verification.trim() != process.env.VERIFICATION) {
+          errors.verification == 'Passphrase is wrong!'
+          throw new UserInputError(errorMessages.userInputError, {
+            errors,
+          })
+        }
+        try {
+          await Stack.collection.drop({})
+          await Note.collection.drop({})
+          return { deleted: true }
+        } catch {
+          return { deleted: false }
+        }
+      } catch (err) {
+        throw new UserInputError(errorMessages.userInputError, {
+          errors: err,
+        })
+      }
+    },
   },
 }
