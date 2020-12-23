@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server");
+const { gql } = require('apollo-server');
 
 module.exports = typeDefs = gql`
   type Stack {
@@ -22,7 +22,7 @@ module.exports = typeDefs = gql`
     allNotes: [Note]
   }
   type Mutation {
-    newStack(title: String, dotColor: String): Stack
+    newStack(title: String!, dotColor: String!): Stack
     newNote(stackID: String, title: String): Note
     editStack(stackID: String, title: String, dotColor: String): Stack
     editNote(
