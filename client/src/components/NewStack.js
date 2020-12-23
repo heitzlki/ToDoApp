@@ -1,18 +1,18 @@
-import { useMutation } from "@apollo/client";
-import { newStackMutation } from "../queries/queries";
-import { useState } from "react";
+import { useMutation } from '@apollo/client'
+import { newStackMutation } from '../queries/queries'
+import { useState } from 'react'
 
 export default function NewStack() {
-  const [stack, setStack] = useState({
-    title: "",
-    dotColor: "red",
-  });
+  const [variables, setVariables] = useState({
+    title: '',
+    dotColor: 'red',
+  })
   const [newStack] = useMutation(newStackMutation, {
     onCompleted(data) {
-      console.log(data);
+      console.log(data)
     },
     onError(err) {
-      console.log(err);
+      console.log(err)
       /*
         try {
             setErrors(err.graphQLErrors[0].extensions.errors.errors);
@@ -20,27 +20,25 @@ export default function NewStack() {
             console.log(err.graphQLErrors)
         }*/
     },
-  });
+  })
   const handleNewStackSubmit = (e) => {
-    e.preventDefault();
-    console.log({ stack });
-    newStack({ stack });
-    //newStack({ title: "Test", dotColor: "red" });
-  };
+    e.preventDefault()
+    newStack({ variables })
+  }
 
   const handleDotChange = (e) => {
-    setStack({
-      title: stack.title,
+    setVariables({
+      title: variables.title,
       dotColor: e.target.value,
-    });
-  };
+    })
+  }
 
   const handleTitleChange = (e) => {
-    setStack({
+    setVariables({
       title: e.target.value,
-      dotColor: stack.dotColor,
-    });
-  };
+      dotColor: variables.dotColor,
+    })
+  }
 
   return (
     <div className="new-stack">
@@ -48,7 +46,7 @@ export default function NewStack() {
       <form onSubmit={handleNewStackSubmit}>
         <div className="new-stack-form">
           <input
-            value={stack.title}
+            value={variables.title}
             onChange={handleTitleChange}
             maxlength="25"
             type="text"
@@ -71,7 +69,7 @@ export default function NewStack() {
         </div>
       </form>
     </div>
-  );
+  )
 }
 /*
 
