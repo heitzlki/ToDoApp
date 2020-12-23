@@ -9,7 +9,7 @@ export default function NewStack() {
   })
   const [newStack] = useMutation(newStackMutation, {
     onCompleted(data) {
-      console.log(data)
+      //window.location.reload() //If mutation was successful reload page
     },
     onError(err) {
       console.log(err)

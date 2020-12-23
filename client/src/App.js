@@ -1,31 +1,18 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import React, { Suspense, lazy } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 //import { Provider } from 'react-redux'
-import { onError } from '@apollo/client/link/error';
-import { ApolloLink, HttpLink } from '@apollo/client';
 
-import './index.scss';
+import './index.scss'
 
-const link = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.map(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
-    );
-
-  if (networkError) console.log(`[Network error]: ${networkError}`);
-});
-//link: ApolloLink.from([link, new HttpLink({ uri: 'http://localhost:4000' })]),
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: ApolloLink.from([link, new HttpLink({ uri: 'http://localhost:4000' })]),
-});
+  uri: 'http://localhost:4000',
+})
 
 //Components
-const Home = lazy(() => import('./components/Home'));
-const NotFound = lazy(() => import('./components/NotFound'));
+const Home = lazy(() => import('./components/Home'))
+const NotFound = lazy(() => import('./components/NotFound'))
 
 export default function App() {
   return (
@@ -41,5 +28,5 @@ export default function App() {
         </Router>
       </div>
     </ApolloProvider>
-  );
+  )
 }
