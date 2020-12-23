@@ -247,7 +247,6 @@ module.exports = resolvers = {
     deleteEverything: async (_, args) => {
       let { verification } = args
       let errors = {}
-      console.log(args)
       try {
         if (verification.trim() === '') {
           errors.verification == 'Passphrase is empty!'
