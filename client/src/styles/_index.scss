@@ -22,16 +22,12 @@ body {
   display: flex;
   width: 100%;
   height: 100%;
-  text-align:center;
+  text-align: center;
   justify-content: center;
   font: 400 $size sans-serif;
   color: $color_;
   background-color: $ground;
-  background: radial-gradient(
-    $border 6%,
-    transparent 6%),
-    darken($ground, 2%
-  );
+  background: radial-gradient($border 6%, transparent 6%), darken($ground, 2%);
   background-position: 0 0, 25px 25px;
   background-size: 25px 25px;
 }
@@ -46,24 +42,20 @@ body {
   padding: 10px;
   border-radius: 20px;
   margin-top: 30px;
-  @media (max-width: 768px) {
-    max-width: 100%;
-    border-radius: 0%;
-    margin-top: 0px;
-  }
+
   .new-stack-title {
     font-size: $font-size-big;
     font-weight: $font-weight-bold;
   }
   .new-stack-title-input {
-      border: none;
-      border-radius: $default-border-radius;
-      background-color: $ground;
-      color: $light;
-      text-align: center;
-      padding: 10px;
-      width: 300px;
-      margin-bottom: 10px;
+    border: none;
+    border-radius: $default-border-radius;
+    background-color: $ground;
+    color: $light;
+    text-align: center;
+    padding: 10px;
+    width: 300px;
+    margin-bottom: 10px;
   }
   .new-stack-button {
     border: none;
@@ -71,11 +63,45 @@ body {
     margin: 0;
     border-radius: 50%;
     outline: none;
-    width: 40px; height: 40px;
+    width: 40px;
+    height: 40px;
     background: $light;
     justify-content: center;
     align-items: center;
     text-align: center;
+  }
+  .dot-color {
+    list-style: none;
+    margin: 5px 40px 5px 40px;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    .dot-color-picker {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s;
+      &:hover {
+        transform: scale(1.1);
+      }
+      &.green {
+        background-color: $green;
+      }
+      &.blue {
+        background-color: $blue;
+      }
+      &.red {
+        background-color: $red;
+      }
+      &.yellow {
+        background-color: $yellow;
+      }
+      &.checked {
+        border: 2px solid $light;
+      }
+    }
   }
 }
 .grid-box {
@@ -85,7 +111,7 @@ body {
   column-gap: 40px;
   break-inside: avoid !important;
   position: relative;
-  box-sizing: inherit; 
+  box-sizing: inherit;
   @media (max-width: 1200px) {
     columns: 3;
     width: calc(100% - 40px);

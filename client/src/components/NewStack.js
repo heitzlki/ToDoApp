@@ -5,7 +5,7 @@ import { useState } from 'react'
 export default function NewStack() {
   const [variables, setVariables] = useState({
     title: '',
-    dotColor: 'red',
+    dotColor: '',
   })
   const [newStack] = useMutation(newStackMutation, {
     onCompleted(data) {
@@ -26,11 +26,12 @@ export default function NewStack() {
     newStack({ variables })
   }
 
-  const handleDotChange = (e) => {
-    setVariables({
+  const handleDotChange = (dotColor) => {
+    /*setVariables({
       title: variables.title,
-      dotColor: e.target.value,
-    })
+      dotColor,
+    })*/
+    console.log(dotColor)
   }
 
   const handleTitleChange = (e) => {
@@ -66,6 +67,44 @@ export default function NewStack() {
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
             </svg>
           </button>
+          <ul className="dot-color">
+            <li
+              className="dot-color-picker green"
+              onClick={() =>
+                setVariables({
+                  title: variables.title,
+                  dotColor: '#00ffccff',
+                })
+              }
+            ></li>
+            <li
+              className="dot-color-picker blue"
+              onClick={() =>
+                setVariables({
+                  title: variables.title,
+                  dotColor: '#2ad4ffff',
+                })
+              }
+            ></li>
+            <li
+              className="dot-color-picker red"
+              onClick={() =>
+                setVariables({
+                  title: variables.title,
+                  dotColor: '#ff0066ff',
+                })
+              }
+            ></li>
+            <li
+              className="dot-color-picker yellow"
+              onClick={() =>
+                setVariables({
+                  title: variables.title,
+                  dotColor: '#ffcc00ff',
+                })
+              }
+            ></li>
+          </ul>
         </div>
       </form>
     </div>
