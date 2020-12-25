@@ -69,7 +69,9 @@ export default function NewStack() {
           </button>
           <ul className="dot-color">
             <li
-              className="dot-color-picker green"
+              className={`dot-color-picker green ${
+                variables.dotColor == '#00ffccff' ? 'checked' : ''
+              }`}
               onClick={() =>
                 setVariables({
                   title: variables.title,
@@ -78,7 +80,9 @@ export default function NewStack() {
               }
             ></li>
             <li
-              className="dot-color-picker blue"
+              className={`dot-color-picker blue ${
+                variables.dotColor == '#2ad4ffff' ? 'checked' : ''
+              }`}
               onClick={() =>
                 setVariables({
                   title: variables.title,
@@ -87,7 +91,9 @@ export default function NewStack() {
               }
             ></li>
             <li
-              className="dot-color-picker red"
+              className={`dot-color-picker red ${
+                variables.dotColor == '#ff0066ff' ? 'checked' : ''
+              }`}
               onClick={() =>
                 setVariables({
                   title: variables.title,
@@ -96,7 +102,9 @@ export default function NewStack() {
               }
             ></li>
             <li
-              className="dot-color-picker yellow"
+              className={`dot-color-picker yellow ${
+                variables.dotColor == '#ffcc00ff' ? 'checked' : ''
+              }`}
               onClick={() =>
                 setVariables({
                   title: variables.title,
