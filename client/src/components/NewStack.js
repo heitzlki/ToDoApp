@@ -7,12 +7,13 @@ export default function NewStack() {
     title: '',
     dotColor: '',
   })
+  const [errors, setErrors] = useState({})
   const [newStack] = useMutation(newStackMutation, {
     onCompleted(data) {
       window.location.reload() //If mutation was successful reload page
     },
     onError(err) {
-      console.log(err)
+      console.log(err.graphQLErrors[0].extensions.errors.error)
       /*
         try {
             setErrors(err.graphQLErrors[0].extensions.errors.errors);

@@ -44,16 +44,16 @@ module.exports = resolvers = {
   Mutation: {
     newStack: async (_, args) => {
       let { title, dotColor } = args
-      let errors = {}
       try {
         if (title.trim().length < 3) {
-          errors.title = errorMessages.stackNameToShort
           throw new UserInputError(errorMessages.UserInputError, {
-            errors,
+            error: 'Stapelname muss aus mind. drei Zeichen bestehen!',
           })
         }
         if (!dotColor) {
-          dotColor = 'white'
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: 'Wähle eine Stapelfarbe!',
+          })
         }
         let stackID = crypto.randomBytes(8).toString('hex')
         const stackIdCheck = await Stack.findOne({
@@ -79,13 +79,11 @@ module.exports = resolvers = {
     },
     newNote: async (_, args) => {
       let { stackID, title } = args
-      let errors = {}
       try {
         if (stackID.trim() === '') errors.stack = "Stack ID isn't aviable!"
         if (title.trim().length < 3) {
-          errors.title = errorMessages.noteNameToShort
           throw new UserInputError(errorMessages.UserInputError, {
-            errors,
+            error: 'Notiz muss aus mind. drei Zeichen bestehen!',
           })
         }
         let noteID = crypto.randomBytes(8).toString('hex')
@@ -113,24 +111,27 @@ module.exports = resolvers = {
     },
     editStack: async (_, args) => {
       let { stackID, title, dotColor } = args
-      let errors = {}
       try {
-        if (stackID.trim() === '') errors.stack = "Stack ID isn't aviable!"
-        if (title.trim().length < 3)
-          errors.title = errorMessages.stackNameToShort
-        if (dotColor.trim() === '') dotColor = 'white'
-
-        if (Object.keys(errors).length < 0) {
-          throw new UserInputError(errorMessages.userInputError, {
-            errors: err,
+        if (stackID.trim() === '') {
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: "StackID isn't aviable. Contact support.",
+          })
+        }
+        if (title.trim().length < 3) {
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: 'Notiz muss aus mind. drei Zeichen bestehen!',
+          })
+        }
+        if (dotColor.trim() === '') {
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: 'Wähle eine Stapelfarbe!',
           })
         }
 
         const stackIdCheck = Stack.find({ stackID })
         if (!stackIdCheck) {
-          errors.stack = "Stack ID isn't aviable!"
-          throw new UserInputError(errorMessages.userInputError, {
-            errors: err,
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: "StackID isn't aviable. Contact support.",
           })
         }
 
@@ -153,24 +154,28 @@ module.exports = resolvers = {
     },
     editNote: async (_, args) => {
       let { stackID, noteID, title, done } = args
-      let errors = {}
       try {
-        if (stackID.trim() === '') errors.stack = "Stack ID isn't aviable!"
-
-        if (noteID.trim() === '') errors.note = "Note ID isn't aviable!"
-        if (title.trim().length < 3)
-          errors.title = errorMessages.stackNameToShort
-        if (!done) done = false
-        if (Object.keys(errors).length < 0) {
-          throw new UserInputError(errorMessages.userInputError, {
-            errors: err,
+        if (stackID.trim() === '') {
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: "StackID isn't aviable. Contact support.",
           })
         }
+        if (noteID.trim() === '') {
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: "NoteID isn't aviable. Contact support.",
+          })
+        }
+        if (title.trim().length < 3) {
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: 'Notiz muss aus mind. drei Zeichen bestehen!',
+          })
+        }
+        if (!done) done = false
+
         const noteIDCheck = Stack.find({ stackID, noteID })
         if (!noteIDCheck) {
-          errors.note = "Note/Stack ID isn't aviable!"
           throw new UserInputError(errorMessages.userInputError, {
-            errors: err,
+            error: "Note/Stack ID isn't aviable!",
           })
         }
 
@@ -196,12 +201,10 @@ module.exports = resolvers = {
     },
     deleteStack: async (_, args) => {
       let { stackID } = args
-      let errors = {}
       try {
         if (stackID.trim() === '') {
-          errors.stack == "Stack ID isn't aviable!"
           throw new UserInputError(errorMessages.UserInputError, {
-            errors,
+            error: "StackID isn't aviable. Contact support.",
           })
         }
         try {
@@ -220,13 +223,15 @@ module.exports = resolvers = {
     },
     deleteNote: async (_, args) => {
       let { stackID, noteID } = args
-      let errors = {}
       try {
-        if (stackID.trim() === '') errors.stack == "Stack ID isn't aviable!"
-        if (noteID.trim() === '') errors.note == "Note ID isn't aviable!"
-        if (Object.keys(errors).length > 0) {
-          throw new UserInputError(errorMessages.userInputError, {
-            errors,
+        if (stackID.trim() === '') {
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: "StackID isn't aviable. Contact support.",
+          })
+        }
+        if (noteID.trim() === '') {
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: "NoteID isn't aviable. Contact support.",
           })
         }
         try {
@@ -246,18 +251,15 @@ module.exports = resolvers = {
     },
     deleteEverything: async (_, args) => {
       let { verification } = args
-      let errors = {}
       try {
         if (verification.trim() === '') {
-          errors.verification == 'Passphrase is empty!'
-          throw new UserInputError(errorMessages.userInputError, {
-            errors,
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: 'Passphrase is empty!',
           })
         }
         if (verification.trim() != process.env.VERIFICATION) {
-          errors.verification == 'Passphrase is wrong!'
-          throw new UserInputError(errorMessages.userInputError, {
-            errors,
+          throw new UserInputError(errorMessages.UserInputError, {
+            error: 'Passphrase is wrong!',
           })
         }
         try {
