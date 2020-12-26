@@ -18,7 +18,7 @@ module.exports = typeDefs = gql`
   }
   type Query {
     stacks: [Stack]
-    stack(stackID: String!): [Stack]
+    stack(stackID: String): [Stack]
     notes(stackID: String): [Note]
     allNotes: [Note]
   }
