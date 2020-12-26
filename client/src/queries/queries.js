@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
-const stackQuery = gql`
+const stacksQuery = gql`
   query {
     stacks {
       stackID
@@ -14,7 +14,23 @@ const stackQuery = gql`
       }
     }
   }
-`;
+`
+
+const stackQuery = gql`
+  query stack($stackID: String) {
+    stack(stackID: $stackID) {
+      stackID
+      title
+      dotColor
+      notes {
+        stackID
+        noteID
+        title
+        done
+      }
+    }
+  }
+`
 const noteQuery = gql`
   query($stackID: String!) {
     notes(stackID: $stackID) {
@@ -24,7 +40,7 @@ const noteQuery = gql`
       done
     }
   }
-`;
+`
 
 const newStackMutation = gql`
   mutation newStack($title: String, $dotColor: String) {
@@ -34,7 +50,7 @@ const newStackMutation = gql`
       dotColor
     }
   }
-`;
+`
 
 const newNoteMutation = gql`
   mutation($stackID: String!, $title: String!) {
@@ -45,7 +61,7 @@ const newNoteMutation = gql`
       done
     }
   }
-`;
+`
 
 const editStackMutation = gql`
   mutation($stackID: String!, $title: String!, $dotColor: String!) {
@@ -55,7 +71,7 @@ const editStackMutation = gql`
       dotColor
     }
   }
-`;
+`
 
 const editNoteMutation = gql`
   mutation(
@@ -71,7 +87,7 @@ const editNoteMutation = gql`
       done
     }
   }
-`;
+`
 
 const deleteStackMutation = gql`
   mutation($stackID: String!) {
@@ -79,7 +95,7 @@ const deleteStackMutation = gql`
       deleted
     }
   }
-`;
+`
 
 const deleteNoteMutation = gql`
   mutation($stackID: String!, $noteID: String) {
@@ -87,10 +103,10 @@ const deleteNoteMutation = gql`
       deleted
     }
   }
-`;
+`
 
 export {
-  stackQuery,
+  stacksQuery,
   noteQuery,
   editStackMutation,
   editNoteMutation,
@@ -98,4 +114,4 @@ export {
   newNoteMutation,
   deleteStackMutation,
   deleteNoteMutation,
-};
+}
