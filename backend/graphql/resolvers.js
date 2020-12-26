@@ -28,6 +28,18 @@ module.exports = resolvers = {
         throw err
       }
     },
+    stack: async (_, args) => {
+      const { stackID } = args
+      try {
+        const stack = await Stack.find({ stackID })
+        if (!stack) return null
+        return stack
+      } catch (err) {
+        throw new UserInputError(errorMessages.userInputError, {
+          err,
+        })
+      }
+    },
   },
   Stack: {
     notes: async (parent) => {
