@@ -1,19 +1,14 @@
 import { useQuery } from '@apollo/client'
-import { useEffect } from 'react'
-import { stackQuery } from '../queries/queries'
+import { stacksQuery } from '../queries/queries'
+import { Link } from 'react-router-dom'
 
-export default function Stack({ match }) {
-  const {
-    params: { stackID },
-  } = match
-  const { loading, error, data } = useQuery(stackQuery, {
-    variables: { stackID },
-  })
+export default function Stack() {
+  const { loading, error, data } = useQuery(stacksQuery)
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
   return (
-    <div className="stack">
-      {data.stack.map((stackData) => {
+    <div className="stacks">
+      {data.stacks.map((stack) => {
         return (
           <div className="stack">
             <div className="stack-head">
@@ -25,17 +20,23 @@ export default function Stack({ match }) {
                     r="10"
                     stroke="#d6ebf6ff"
                     stroke-width="0"
-                    fill={stackData.dotColor}
+                    fill={stack.dotColor}
                   />
                 </svg>
               </div>
-              <p>{stackData.title}</p>
+              <Link
+                to={`/${stack.stackID}`}
+                className="stack-title"
+                key={stack.stackID}
+              >
+                {stack.title}
+              </Link>
               <div className="stack-edit">
                 <></>
               </div>
             </div>
             <div className="stack-body">
-              {stackData.notes.map((note) => {
+              {stack.notes.map((note) => {
                 return (
                   <p className="stack-note" key={note.noteID}>
                     • {note.title}

@@ -12,6 +12,7 @@ const client = new ApolloClient({
 
 //Components
 const Home = lazy(() => import('./components/Home'))
+const Stack = lazy(() => import('./components/Stack'))
 const NotFound = lazy(() => import('./components/NotFound'))
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/:stackID" component={Stack} />
               <Route component={NotFound} />
             </Switch>
           </Suspense>

@@ -108,6 +108,7 @@ const deleteNoteMutation = gql`
 export {
   stacksQuery,
   noteQuery,
+  stackQuery,
   editStackMutation,
   editNoteMutation,
   newStackMutation,

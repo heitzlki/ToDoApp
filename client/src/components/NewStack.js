@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { newStackMutation } from '../queries/queries'
 import { useState } from 'react'
+import Error from './Error'
 
 export default function NewStack() {
   const [variables, setVariables] = useState({
@@ -13,7 +14,8 @@ export default function NewStack() {
       window.location.reload() //If mutation was successful reload page
     },
     onError(err) {
-      console.log(err.graphQLErrors[0].extensions.errors.error)
+      //console.log(err.graphQLErrors[0].extensions.errors.error)
+      Error(err.graphQLErrors[0].extensions.errors.error)
       /*
         try {
             setErrors(err.graphQLErrors[0].extensions.errors.errors);
