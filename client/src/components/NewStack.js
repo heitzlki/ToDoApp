@@ -20,10 +20,10 @@ export default function NewStack() {
       store.addNotification({
         title: 'Fehler',
         message: error,
-        type: 'danger', // 'default', 'success', 'info', 'warning'
-        container: 'top-left', // where to position the notifications
-        animationIn: ['animated', 'fadeIn'], // animate.css classes that's applied
-        animationOut: ['animated', 'fadeOut'], // animate.css classes that's applied
+        type: 'danger',
+        container: 'top-left',
+        animationIn: ['animated', 'fadeIn'],
+        animationOut: ['animated', 'fadeOut'],
         dismiss: {
           duration: 3000,
         },

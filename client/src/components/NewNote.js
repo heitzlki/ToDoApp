@@ -6,37 +6,44 @@ import { store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import 'animate.css'
 
-export default function NewNote() {
+export default function NewNote(data) {
   const [variables, setVariables] = useState({
+    stackID: data.data,
     title: '',
   })
-  const [errors, setErrors] = useState({})
   const [newNote] = useMutation(newNoteMutation, {
     onCompleted(data) {
       window.location.reload() //If mutation was successful reload page
     },
     onError(err) {
-      store.addNotification({
-        title: 'Dropbox',
-        message: 'Files were synced',
-        type: 'default', // 'default', 'success', 'info', 'warning'
-        container: 'bottom-left', // where to position the notifications
-        animationIn: ['animated', 'fadeIn'], // animate.css classes that's applied
-        animationOut: ['animated', 'fadeOut'], // animate.css classes that's applied
-        dismiss: {
-          duration: 3000,
-        },
-      })
-      //console.log(err)
+      try {
+        let error = err.graphQLErrors[0].extensions.errors.error
+        store.addNotification({
+          title: 'Fehler',
+          message: error,
+          type: 'danger',
+          container: 'top-left',
+          animationIn: ['animated', 'fadeIn'],
+          animationOut: ['animated', 'fadeOut'],
+          dismiss: {
+            duration: 3000,
+          },
+        })
+      } catch {
+        window.alert('Something went wrong!')
+        setTimeout(window.location.reload(), 3000)
+      }
     },
   })
   const handleNewNoteSubmit = (e) => {
     e.preventDefault()
-    newStack({ variables })
+    console.log(variables)
+    newNote({ variables })
   }
 
   const handleTitleChange = (e) => {
     setVariables({
+      stackID: data.data,
       title: e.target.value,
     })
   }

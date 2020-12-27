@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { stackQuery } from '../queries/queries'
-//import NewNote from 'NewNote'
+import NewNote from './NewNote'
 
 export default function Stack({ match }) {
   const {
@@ -14,6 +14,7 @@ export default function Stack({ match }) {
   return (
     <>
       <div className="stack">
+        <NewNote data={stackID} />
         {data.stack.map((stackData) => {
           return (
             <div className="stack">
