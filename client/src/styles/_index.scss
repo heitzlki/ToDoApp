@@ -152,6 +152,32 @@ body {
     }
   }
 }
+.note {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background: $second-layer-color;
+  max-width: 100%;
+  border-radius: $default-border-radius;
+  overflow: hidden;
+  place-items: left;
+  .note-dot {
+    margin-top: 10px;
+    padding-right: 100%;
+    padding-left: 10px;
+  }
+  .note-title {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    color: $color;
+    font-size: $font-size-big;
+    font-weight: $font-weight-bold;
+  }
+  .note-note {
+    margin: 10px;
+  }
+}
 /*
 .grid-box {
   display: grid;
