@@ -1,5 +1,5 @@
 $size: 1.35rem;
-$color_: #7a7a8c;
+$color: #7a7a8c;
 $ground: #1d1e22; // ffffff
 $border: #4c4f5a;
 $light: #d6ebf6ff; //bbddeeff d6ebf6ff
@@ -25,7 +25,7 @@ body {
   text-align: center;
   justify-content: center;
   font: 400 $size sans-serif;
-  color: $color_;
+  color: $color;
   background-color: $ground;
   background: radial-gradient($border 6%, transparent 6%), darken($ground, 2%);
   background-position: 0 0, 25px 25px;
@@ -141,6 +141,9 @@ body {
     }
     .stack-title {
       margin: 0px;
+      padding: 0px;
+      text-decoration: none;
+      color: $color;
       font-size: $font-size-big;
       font-weight: $font-weight-bold;
     }

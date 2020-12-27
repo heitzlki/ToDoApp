@@ -1,10 +1,12 @@
 import NewStack from './NewStack'
 import Stacks from './Stacks'
-import { Switch, Route } from 'react-router-dom'
+
+import ReactNotification from 'react-notifications-component'
 
 export default function Home() {
   return (
     <div className="App">
+      <ReactNotification />
       <NewStack />
       <div className="grid-box">
         <Stacks />
