@@ -16,18 +16,18 @@ export default function NewStack() {
       window.location.reload() //If mutation was successful reload page
     },
     onError(err) {
+      let error = err.graphQLErrors[0].extensions.errors.error
       store.addNotification({
-        title: 'Dropbox',
-        message: 'Files were synced',
-        type: 'default', // 'default', 'success', 'info', 'warning'
-        container: 'bottom-left', // where to position the notifications
+        title: 'Fehler',
+        message: error,
+        type: 'danger', // 'default', 'success', 'info', 'warning'
+        container: 'top-left', // where to position the notifications
         animationIn: ['animated', 'fadeIn'], // animate.css classes that's applied
         animationOut: ['animated', 'fadeOut'], // animate.css classes that's applied
         dismiss: {
           duration: 3000,
         },
       })
-      console.log(err.graphQLErrors[0].extensions.errors.error)
     },
   })
   const handleNewStackSubmit = (e) => {
