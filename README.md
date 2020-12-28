@@ -8,7 +8,7 @@
 * [Setup](#setup)
 
 ## General info
-FlexNote is a PWA that helps organize notes.
+FlexNote is a web-application that helps organize notes.
 ## Technologies
 Project is created with:
 ### Client
