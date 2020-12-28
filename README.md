@@ -1,5 +1,7 @@
 # FlexNote
-![PlantTaskTransparentLogo](https://github.com/heitzlki/FlexNote/blob/main/FlexNote.png)
+![FlexNoteLogo](https://github.com/heitzlki/FlexNote/blob/main/FlexNoteLogo.png)
+![FlexNoteHome](https://github.com/heitzlki/FlexNote/blob/main/FlexNoteHome.png)
+![FlexNoteNewNote](https://github.com/heitzlki/FlexNote/blob/main/FlexNoteNewNote.png)
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
