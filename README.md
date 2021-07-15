@@ -1,7 +1,10 @@
-# FlexNote
-![FlexNoteLogo](https://github.com/heitzlki/FlexNote/blob/main/FlexNoteLogo.png)
-![FlexNoteHome](https://github.com/heitzlki/FlexNote/blob/main/FlexNoteHome.png)
-![FlexNoteNewNote](https://github.com/heitzlki/FlexNote/blob/main/FlexNoteNewNote.png)
+# FlexNote (previous name)
+<p align="center">
+  <img alt="FlexNoteLogo" width="200px" src="https://raw.githubusercontent.com/heitzlki/ToDoApp/main/FlexNoteLogo.png" />
+  <img alt="FlexNoteHome" src="https://raw.githubusercontent.com/heitzlki/ToDoApp/main/FlexNoteHome.png" />
+  <img alt="FlexNoteNewNote" src="https://raw.githubusercontent.com/heitzlki/ToDoApp/main/FlexNoteNewNote.png" />
+</p>
+
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
